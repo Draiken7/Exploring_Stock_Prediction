@@ -14,7 +14,7 @@ $mid = (high + low) / 2$
 
 The data used for these is for the Berkshire B ticker (BRK.B).
 
-###1. EDA
+### 1. EDA
 Exploratory Data Analysis reveals various Trends among the features against Date.
 
 - Date vs Low Prices
@@ -54,7 +54,7 @@ For Volume : p-value = 2.420874225174702e-16 : Series is Stationhary!
 ###2. Preprocessing
 The preprocessing includes normalization of mid prices on a smoothing window. The size of the window here was taken to be 1000. The train set includes first $80%$ of the data while the test set contains the remaining $20%$ of the data. The data itself is sorted by date, before doing the train test split.
 
-###3. LSTM
+### 3. LSTM
 **-Data Loading**
 The `DataGeneratorSequence` class handles loading the data in approriate chunks to the lstm model. It Divides the input data into batches based on `batch_size` and length of data available and returns a tensor containing `batch_size` number of stacked tensor each having a sequence length equal to `num_unrolls`. `num_unrolls` signifies the number of timesteps to be handled by the lstm in conjunction by maintaining hidden and cell states. It also returns the ground truth which is randomly sampled from the next values availabe in the batch rather than the exact price of the next day.
 
@@ -67,5 +67,5 @@ The training has been done for 30 - 50 epochs with equivalent hyperparameters as
 **-Testing and Prediction**
 For prediction purposes, the model is first primed(to generate hidden and cell state information) using data for the first `num_unrolls` datees, then these states are retained and prediction is done for the next `num_pred` days.
 
-###4. Conclusion
+### 4. Conclusion
 Although the LSTM seems more robust in predictions for shorter lengths, especially when primed with train data, it seems to suffer as the prediction window is increased and increasingly as the model is primed with unseen test data.
